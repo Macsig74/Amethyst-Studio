@@ -61,7 +61,7 @@ export default function Home() {
     <div>
       <DottedSurface />
       <Header />
-      <main className="relative z-10 flex min-h-[calc(100vh-140px)] flex-col items-center justify-center px-4 text-center pb-32">
+      <main className="relative z-10 flex min-h-[100vh] flex-col items-center justify-center px-4 text-center pb-32">
         <h1 className="text-5xl md:text-[60pt] font-bold tracking-tight grid grid-cols-1 md:grid-cols-2 w-full max-w-7xl mx-auto items-center md:gap-x-4">
           <span className="text-foreground md:text-right whitespace-nowrap">You need a</span>
           <div className="md:text-left h-full flex items-center justify-start min-h-[1.2em]">

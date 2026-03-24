@@ -5,6 +5,9 @@ import { cn } from '@/lib/utils';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
 import { useScroll } from '@/components/ui/use-scroll';
 
+import { ThemeToggle } from '@/components/ui/theme-toggle';
+import { ContactDrawer } from '@/components/ui/contact-drawer';
+
 export function Header() {
     const [open, setOpen] = React.useState(false);
     const scrolled = useScroll(10);
@@ -13,7 +16,6 @@ export function Header() {
         { label: 'Dev', href: '#dev' },
         { label: 'Build', href: '#build' },
         { label: 'À propos', href: '#about' },
-        { label: 'Contact', href: '#contact' },
     ];
 
     React.useEffect(() => {
@@ -37,39 +39,52 @@ export function Header() {
                     { 'md:px-2': scrolled },
                 )}
             >
-                <span className="text-xl font-bold tracking-tighter">Amethyst Studio</span>
-                <div className="hidden items-center gap-2 md:flex">
+                <div className="flex items-center gap-2">
+                    <span className="text-xl font-bold tracking-tighter">Amethyst Studio</span>
+                </div>
+                
+                <div className="hidden items-center gap-4 md:flex">
                     {links.map((link, i) => (
                         <a key={i} className={buttonVariants({ variant: 'ghost' })} href={link.href}>
                             {link.label}
                         </a>
                     ))}
-                    <Button variant="outline">Se connecter</Button>
-                    <Button>Me contacter</Button>
+                    <div className="flex items-center gap-2 border-l pl-4 border-border/50">
+                        <ThemeToggle />
+                        <ContactDrawer 
+                            name="us"
+                            trigger={<Button size="sm">Nous contacter</Button>}
+                        />
+                    </div>
                 </div>
-                <Button size="icon" variant="outline" onClick={() => setOpen(!open)} className="md:hidden">
-                    <MenuToggleIcon open={open} className="size-5" duration={300} />
-                </Button>
+
+                <div className="flex items-center gap-2 md:hidden">
+                    <ThemeToggle className="w-14 h-7" />
+                    <Button size="icon" variant="outline" onClick={() => setOpen(!open)}>
+                        <MenuToggleIcon open={open} className="size-5" duration={300} />
+                    </Button>
+                </div>
             </nav>
 
             <div
                 className={cn(
-                    'bg-background/90 fixed top-14 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-y md:hidden',
-                    open ? 'block' : 'hidden',
+                    'bg-background/90 fixed top-14 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-y md:hidden transition-all duration-300',
+                    open ? 'opacity-100 visible' : 'opacity-0 invisible',
                 )}
             >
                 <div
-                    data-slot={open ? 'open' : 'closed'}
                     className={cn(
-                        'data-[slot=open]:animate-in data-[slot=open]:zoom-in-95 data-[slot=closed]:animate-out data-[slot=closed]:zoom-out-95 ease-out',
-                        'flex h-full w-full flex-col justify-between gap-y-2 p-4',
+                        'flex h-full w-full flex-col justify-between gap-y-2 p-6 bg-background',
+                        open ? 'translate-y-0' : '-translate-y-4'
                     )}
                 >
-                    <div className="grid gap-y-2">
+                    <div className="grid gap-y-4 mt-8">
                         {links.map((link) => (
                             <a
                                 key={link.label}
-                                className={buttonVariants({ variant: 'ghost', className: 'justify-start' })}
+                                className={cn(
+                                    buttonVariants({ variant: 'ghost', className: 'justify-center text-xl h-14' })
+                                )}
                                 href={link.href}
                                 onClick={() => setOpen(false)}
                             >
@@ -77,9 +92,15 @@ export function Header() {
                             </a>
                         ))}
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <Button variant="outline" className="w-full">Se connecter</Button>
-                        <Button className="w-full">Me contacter</Button>
+                    <div className="flex flex-col gap-4 mb-12">
+                        <ContactDrawer 
+                            name="us"
+                            trigger={
+                                <Button className="w-full h-14 text-lg font-bold" onClick={() => setOpen(false)}>
+                                    Nous contacter
+                                </Button>
+                            }
+                        />
                     </div>
                 </div>
             </div>
