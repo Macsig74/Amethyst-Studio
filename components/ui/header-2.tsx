@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from 'next/link';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
@@ -13,9 +14,10 @@ export function Header() {
     const scrolled = useScroll(10);
 
     const links = [
-        { label: 'Dev', href: '#dev' },
-        { label: 'Build', href: '#build' },
-        { label: 'À propos', href: '#about' },
+        { label: 'Home', href: '/' },
+        { label: 'Dev', href: '/dev' },
+        { label: 'Build', href: '/build' },
+        { label: 'À propos', href: '/#about' },
     ];
 
     React.useEffect(() => {
@@ -40,14 +42,14 @@ export function Header() {
                 )}
             >
                 <div className="flex items-center gap-2">
-                    <span className="text-xl font-bold tracking-tighter">Amethyst Studio</span>
+                    <Link href="/" className="text-xl font-bold tracking-tighter">Amethyst Studio</Link>
                 </div>
                 
                 <div className="hidden items-center gap-4 md:flex">
                     {links.map((link, i) => (
-                        <a key={i} className={buttonVariants({ variant: 'ghost' })} href={link.href}>
+                        <Link key={i} className={buttonVariants({ variant: 'ghost' })} href={link.href}>
                             {link.label}
-                        </a>
+                        </Link>
                     ))}
                     <div className="flex items-center gap-2 border-l pl-4 border-border/50">
                         <ThemeToggle />
@@ -80,7 +82,7 @@ export function Header() {
                 >
                     <div className="grid gap-y-4 mt-8">
                         {links.map((link) => (
-                            <a
+                            <Link
                                 key={link.label}
                                 className={cn(
                                     buttonVariants({ variant: 'ghost', className: 'justify-center text-xl h-14' })
@@ -89,7 +91,7 @@ export function Header() {
                                 onClick={() => setOpen(false)}
                             >
                                 {link.label}
-                            </a>
+                            </Link>
                         ))}
                     </div>
                     <div className="flex flex-col gap-4 mb-12">

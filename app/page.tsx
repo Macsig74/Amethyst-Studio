@@ -1,6 +1,7 @@
 'use client';
 import { DottedSurface } from '@/components/ui/dotted-surface';
 import { Header } from '@/components/ui/header-2';
+import Link from 'next/link';
 import { Typewriter } from '@/components/ui/typewriter';
 import { GradientButton } from '@/components/ui/gradient-button';
 import { AvatarHoverCard } from '@/components/ui/avatar-hover-card';
@@ -103,10 +104,12 @@ export default function Home() {
                       </Button>
                     }
                   />
-                  <Button size="sm" className="flex-1 font-bold">
-                    <Eye className="h-4 w-4 mr-2" />
-                    See more
-                  </Button>
+                  <Link href="/dev" className="flex-1">
+                    <Button size="sm" className="w-full font-bold">
+                      <Eye className="h-4 w-4 mr-2" />
+                      See more
+                    </Button>
+                  </Link>
                 </div>
               }
             />
@@ -128,10 +131,12 @@ export default function Home() {
                       </Button>
                     }
                   />
-                  <Button size="sm" className="flex-1 font-bold">
-                    <Eye className="h-4 w-4 mr-2" />
-                    See more
-                  </Button>
+                  <Link href="/build" className="flex-1">
+                    <Button size="sm" className="w-full font-bold">
+                      <Eye className="h-4 w-4 mr-2" />
+                      See more
+                    </Button>
+                  </Link>
                 </div>
               }
             />
